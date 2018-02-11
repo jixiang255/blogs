@@ -7,12 +7,11 @@
 + [《css深入原理系列之开篇》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/%e5%bc%80%e7%af%87.md)- css深入原理系列的导读，介绍各文章的大体内容，及相关总结方法。
 + [《css深入原理系列之渲染网页及盒子模型算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/%e6%b8%b2%e6%9f%93%e7%bd%91%e9%a1%b5%e5%8f%8a%e7%9b%92%e5%ad%90%e6%a8%a1%e5%9e%8b%e7%ae%97%e6%b3%95.md) - 介绍浏览器渲染网页的过程，cssom树生成的算法
 + [《css深入原理系列之block formatting context算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/block+formatting+context%e7%ae%97%e6%b3%95.md) - 介绍bfc概念及算法
-+ [《css深入原理系列之containing block的算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/containing+block%e7%ae%97%e6%b3%95.md) - 介绍containing block概念及其算法
-+ [《css深入原理系列之inline formatting context及line-height算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/inline+formatting+context%e5%8f%8aline-height%e7%ae%97%e6%b3%95.md) - 介绍ifc概念及其高度计算算法
++ [《css深入原理系列之containing block的算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/containing%20block%e7%ae%97%e6%b3%95.md) - 介绍containing block概念及其算法
++ [《css深入原理系列之inline formatting context及line-height算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/inline%20formatting%20context%e5%8f%8aline-height%e7%ae%97%e6%b3%95.md) - 介绍ifc概念及其高度计算算法
 + [《css深入原理系列之position定位算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/position%e5%ae%9a%e4%bd%8d%e7%ae%97%e6%b3%95.md) - 介绍position类型及其定位原理
-+ [《css深入原理系列之stacking context算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/stacking+context%e7%ae%97%e6%b3%95.md) - 介绍stacking context概念
-+ [《css深入原理系列之元素高宽度算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/%e5%85%83%e7%b4%a0%e9%ab%98%e5%ae%bd%e5%ba%a6%e7%ae%97.md) - 介绍元素确定宽高度算法
-+ [《css深入原理系列之flex layout算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/flex+layout%e7%ae%97%e6%b3%95.md) - flex layout标准及算法
++ [《css深入原理系列之stacking context算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/stacking%20context%e7%ae%97%e6%b3%95.md) - 介绍stacking context概念
++ [《css深入原理系列之元素高宽度算法》](css%e6%b7%b1%e5%85%a5%e5%8e%9f%e7%90%86%e7%b3%bb%e5%88%97/%e5%85%83%e7%b4%a0%e9%ab%98%e5%ae%bd%e5%ba%a6%e7%ae%97%e6%b3%95.md) - 介绍元素确定宽高度算法
 
 ## JS系列
 
