@@ -85,7 +85,5 @@ p {
 根据上述描述的计算规则，那么在IE低版本中，是如何计算的呢？因为IE低版本，元素的宽度=内容宽度+padding
 
 # 参考链接
-
-https://www.w3.org/TR/2011/REC-CSS2-20110607/visudet.html#containing-block-details
-
-https://developer.mozilla.org/en-US/docs/Web/CSS/All_About_The_Containing_Block
++ https://www.w3.org/TR/2011/REC-CSS2-20110607/visudet.html#containing-block-details
++ https://developer.mozilla.org/en-US/docs/Web/CSS/All_About_The_Containing_Block

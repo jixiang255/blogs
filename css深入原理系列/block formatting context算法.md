@@ -1,4 +1,4 @@
-# css深入理解系列之block formatting context算法
+# css深入理解系列之block formatting context算法(未完待续)
 
 承接《渲染页面及盒子模型生成算法》文章，本文介绍block类型的盒子模型。
 
