@@ -1,48 +1,43 @@
-# css深入理解系列之position定位算法(未完待续)
+# css深入理解系列之position定位算法
 
 ## 疑问与目的
-
-1. 
-
+1. position与floats有何不同？
 
 ## position定位
 
-
-
-1.position类型
+在[css2.1 visuren](https://www.w3.org/TR/CSS21/visuren.html)文章中，从9.3章节到9.8章节，主要描述position属性概念，有如下原话：
 ```
-A positioned element is an element whose computed position value is either relative, absolute, fixed, or sticky. (In other words, it's anything except static.)
-A relatively positioned element is an element whose computed position value is relative. The top and bottom properties specify the vertical offset from its normal position; the left and right properties specify the horizontal offset.
-An absolutely positioned element is an element whose computed position value is absolute or fixed. The top, right, bottom, and left properties specify offsets from the edges of the element's containing block. (The containing block is the ancestor to which the element is relatively positioned.) If the element has margins, they are added to the offset.
-A stickily positioned element is an element whose computed position value is sticky. It's treated as relatively positioned until its containing block crosses a specified threshold, at which point it is treated as fixed.
-Most of the time, absolutely positioned elements that have height and width set to auto are sized so as to fit their contents. However, non-replaced, absolutely positioned elements can be made to fill the available vertical space by specifying both top and bottom and leaving height unspecified (that is, auto). They can likewise be made to fill the available horizontal space by specifying both left and right and leaving width as auto.
+In CSS 2.1, a box may be laid out according to three positioning schemes:
 
-Except for the case just described (of absolutely positioned elements filling the available space):
+Normal flow. In CSS 2.1, normal flow includes block formatting of block-level boxes, inline formatting of inline-level boxes, and relative positioning of block-level and inline-level boxes.
+Floats. In the float model, a box is first laid out according to the normal flow, then taken out of the flow and shifted to the left or right as far as possible. Content may flow along the side of a float.
+Absolute positioning. In the absolute positioning model, a box is removed from the normal flow entirely (it has no impact on later siblings) and assigned a position with respect to a containing block.
+An element is called out of flow if it is floated, absolutely positioned, or is the root element. An element is called in-flow if it is not out-of-flow. The flow of an element A is the set consisting of A and all in-flow elements whose nearest out-of-flow ancestor is A.
 
-If both top and bottom are specified (technically, not auto), top wins.
-If both left and right are specified, left wins when direction is ltr (English, horizontal Japanese, etc.) and right wins when direction is rtl (Persian, Arabic, Hebrew, etc.).
-```
-
-
-
-2.position属性值
-```
 static
-The element is positioned according to the normal flow of the document. The top, right, bottom, left, and z-index properties have no effect. This is the default value.
+The box is a normal box, laid out according to the normal flow. The 'top', 'right', 'bottom', and 'left' properties do not apply.
 relative
-The element is positioned according to the normal flow of the document, and then offset relative to itself based on the values of top, right, bottom, and left. The offset does not affect the position of any other elements; thus, the space given for the element in the page layout is the same as if position were static. This value creates a new stacking context when the value of z-index is not auto. The effect of relative on table-*-group, table-row, table-column, table-cell, and table-caption elements is undefined.
+The box's position is calculated according to the normal flow (this is called the position in normal flow). Then the box is offset relative to its normal position. When a box B is relatively positioned, the position of the following box is calculated as though B were not offset. The effect of 'position:relative' on table-row-group, table-header-group, table-footer-group, table-row, table-column-group, table-column, table-cell, and table-caption elements is undefined.
 absolute
-The element is removed from the normal document flow; no space is created for the element in the page layout. Instead, it is positioned relative to its closest positioned ancestor if any; otherwise, it is placed relative to the initial containing block. Its final position is determined by the values of top, right, bottom, and left. This value creates a new stacking context when the value of z-index is not auto. Absolutely positioned boxes can have margins, and they do not collapse with any other margins.
+The box's position (and possibly size) is specified with the 'top', 'right', 'bottom', and 'left' properties. These properties specify offsets with respect to the box's containing block. Absolutely positioned boxes are taken out of the normal flow. This means they have no impact on the layout of later siblings. Also, though absolutely positioned boxes have margins, they do not collapse with any other margins.
 fixed
-The element is removed from the normal document flow; no space is created for the element in the page layout. Instead, it is positioned relative to the screen's viewport and doesn't move when scrolled. Its final position is determined by the values of top, right, bottom, and left. This value always creates a new stacking context. When an ancestor has the transform or perspective property set to something other than none, that ancestor is used as the container instead of the viewport (see CSS Transforms Spec). In printed documents, the element is placed in the same position on every page.
-sticky
-The element is positioned according to the normal flow of the document, and then offset relative to its flow root and containing block, including table-related elements, based on the values of top,  right, bottom, and left. The offset does not affect the position of any other elements. This value always creates a new stacking context. Note that sticky, by specification, will not work inside element with overflow: hidden or auto. (ref: Github issue on W3C CSSWG)
+The box's position is calculated according to the 'absolute' model, but in addition, the box is fixed with respect to some reference. As with the 'absolute' model, the box's margins do not collapse with any other margins. In the case of handheld, projection, screen, tty, and tv media types, the box is fixed with respect to the viewport and does not move when scrolled. In the case of the print media type, the box is rendered on every page, and is fixed with respect to the page box, even if the page is seen through a viewport (in the case of a print-preview, for example). For other media types, the presentation is undefined. Authors may wish to specify 'fixed' in a media-dependent way. For instance, an author may want a box to remain at the top of the viewport on the screen, but not at the top of each printed page. 
 ```
+上述大体描述是元素定位类型分为正常流、浮动型、绝对定位，static、relative属于正常流，float元素优先处于正常流中，但尽可能移动到左边或右边。
 
-
-## 结论
-
-
+在[devdocs position](http://devdocs.io/css/position)中，有以下原话：
+```
+relative
+This value creates a new stacking context when the value of z-index is not auto. 
+absolute
+This value creates a new stacking context when the value of z-index is not auto.
+fixed
+This value always creates a new stacking context.
+sticky
+This value always creates a new stacking context.
+```
+上述描述fixed、sticky将产生stacking context，而relative、absolute产生stacking context是当z-index不为零时
 
 ## 参考
 + http://devdocs.io/css/position
++ https://www.w3.org/TR/CSS21/visuren.html
