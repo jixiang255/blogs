@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>image processing Example</title>
+<link href="./image-processing/js_example_style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div>
+        <h2>说明</h2>
+        <p>本示例主要界面来源于opencv.js官方介绍，地址：https://docs.opencv.org/master/d5/d10/tutorial_js_root.html</p>
+        <p>ps特效算法，主要参考csdn博客，地址：http://blog.csdn.net/matrix_space</p>
+    </div>
+    
+<div>
+    <div><div class="control">
+        <button id="tryIt">运行</button>
+        <span>ps特效</span>
+        <select id="slt-filter-id" onchange="handlerSelectEvent(this.options[this.options.selectedIndex].value)">
+            <option value="blur1.js">径向模糊</option>
+            <option value="blur2.js">旋转模糊</option>
+            <option value="Circle_Filter.js">扇形效果</option>
+            <option value="Ellipsoid_filter.js">挤压效果</option>
+            <option value="Ellipsoid2_filter.js">放大镜效果</option>
+            <option value="GaussianBlur.js">高斯模糊</option>
+            <option value="kaleidoscope_Filter.js">万花筒效果</option>
+            <option value="Pinch_Filter.js">中心旋转效果</option>
+            <option value="Twirl_Filter.js">旋转效果1</option>
+            <option value="vertex.js">旋转效果2</option>
+            <option value="water_wave.js">水波效果1</option>
+            <option value="wave.js">水波效果2</option>
+        </select>
+</div>
+
+<textarea class="code" rows="9" cols="100" id="codeEditor" spellcheck="false"></textarea>
+<p class="err" id="errorMessage"></p>
+</div>
+<div>
+    <table cellpadding="0" cellspacing="0" width="0" border="0">
+    <tbody><tr>
+        <td>
+            <canvas id="canvasInput" width="400" height="400"></canvas>
+        </td>
+        <td>
+            <canvas id="canvasOutput"></canvas>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="caption">canvasInput <input type="file" id="fileInput" name="file" accept="image/*"></div>
+        </td>
+        <td>
+            <div class="caption">canvasOutput</div>
+        </td>
+    </tr>
+    </tbody></table>
+</div>
+<script type="text/javascript" async src="./image-processing/opencv.js"></script><script src="./image-processing/utils.js" type="text/javascript"></script>
+<script id="codeSnippet" type="text/code-snippet">
+let src = cv.imread('canvasInput');
+let dst = new cv.Mat();
+let dsize = new cv.Size(src.rows, src.cols);
+// (data32F[0], data32F[1]) is the first point
+// (data32F[2], data32F[3]) is the sescond point
+// (data32F[4], data32F[5]) is the third point
+// (data32F[6], data32F[7]) is the fourth point
+let srcTri = cv.matFromArray(4, 1, cv.CV_32FC2, [56, 65, 368, 52, 28, 387, 389, 390]);
+let dstTri = cv.matFromArray(4, 1, cv.CV_32FC2, [0, 0, 300, 0, 0, 300, 300, 300]);
+let M = cv.getPerspectiveTransform(srcTri, dstTri);
+// You can try more different parameters
+cv.warpPerspective(src, dst, M, dsize, cv.INTER_LINEAR, cv.BORDER_CONSTANT, new cv.Scalar());
+cv.imshow('canvasOutput', dst);
+src.delete(); dst.delete(); M.delete(); srcTri.delete(); dstTri.delete();
+</script>
+<script type="text/javascript">
+let utils = new Utils('errorMessage');
+
+utils.loadCode('codeSnippet', 'codeEditor');
+utils.loadImageToCanvas('./image-processing/lena.png', 'canvasInput');
+utils.addFileInputHandler('fileInput', 'canvasInput');
+
+let tryIt = document.getElementById('tryIt');
+tryIt.addEventListener('click', () => {
+    utils.executeCode('codeEditor');
+});
+
+function getXhr(){
+    var xhr = null;
+    if(window.XMLHttpRequest){
+        //非IE浏览器
+        xhr = new XMLHttpRequest();
+    }else{
+        //IE浏览器
+        xhr = new ActiveXObject("Microsoft.XMLHttp");
+    }
+    return xhr;
+}
+
+function sendRequest(jsname) {
+    var xhr = getXhr();
+    xhr.open('get','./filters_algorithm_collect/' + jsname,true);
+
+    xhr.onreadystatechange = function(){
+    //处理服务器返回的数据
+        if(xhr.readyState == 4 && xhr.status==200){
+            //获取服务器返回的数据
+            var txt = xhr.responseText;
+            var codeEditor = document.getElementById('codeEditor');
+            codeEditor.value = txt;
+            //通过拿到的数据更新页面
+        }
+    }   
+    xhr.send(null);
+}
+
+function handlerSelectEvent(val) {
+    sendRequest(val);
+}
+// utils.loadOpenCv(() => {
+//     tryIt.removeAttribute('disabled');
+// });
+</script>
+
+
+</body></html>
